@@ -1,0 +1,22 @@
+<mat-accordion *ngFor="let league of leagues">
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>sports_soccer</mat-icon>
+                <span>{{league.name}}</span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <a [routerLink]="['/table']" [queryParams]="{id: league.id}" routerLinkActive="active" mat-button class="menu-button">
+            <mat-icon>table_view</mat-icon>
+            <span>Tabuľka</span>
+        </a>
+        <a [routerLink]="['/result']" [queryParams]="{id: league.id}" routerLinkActive="active" mat-button class="menu-button">
+            <mat-icon>fact_check</mat-icon>
+            <span>Výsledky</span>
+        </a>
+
+    </mat-expansion-panel>
+</mat-accordion>
