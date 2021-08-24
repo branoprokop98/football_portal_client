@@ -3,11 +3,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {ActivatedRoute} from "@angular/router";
 import {LeagueService} from "../services/league.service";
-import {MatchService} from "../services/match.service";
 import {LeagueMatchSeason} from "../classes/league-match-season";
 import {Observable} from "rxjs";
 import {error} from "@angular/compiler/src/util";
 import {League} from "../classes/league";
+import {MatchService} from "../services/match.service";
 
 @Component({
     selector: 'app-result',
