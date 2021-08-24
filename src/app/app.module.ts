@@ -21,13 +21,19 @@ import {MatCardModule} from "@angular/material/card";
 import {FormsModule} from "@angular/forms";
 import { LeagueSelectionComponent } from './league-selection/league-selection.component';
 import {HttpClientModule} from "@angular/common/http";
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { UserMenuComponent } from './menu/user-menu/user-menu.component';
+import { AdminMenuComponent } from './menu/admin-menu/admin-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     ResultComponent,
-    LeagueSelectionComponent
+    LeagueSelectionComponent,
+    AdminHomeComponent,
+    UserMenuComponent,
+    AdminMenuComponent
   ],
     imports: [
         BrowserModule,

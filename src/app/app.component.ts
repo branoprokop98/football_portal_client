@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {delay} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit {
 
     panelOpenState = false;
 
-    constructor(private observer: BreakpointObserver) {
+    constructor(private observer: BreakpointObserver, public route: Router) {
     }
 
     ngAfterViewInit() {
@@ -33,5 +33,7 @@ export class AppComponent implements AfterViewInit {
                     this.sidenav.open();
                 }
             });
+
+        console.log(this.route)
     }
 }
