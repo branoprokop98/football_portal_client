@@ -18,5 +18,9 @@ export class SeasonService {
         return this.httpClient.get<Season[]>(this.requestURL + '/getAll');
     }
 
+    public getAllSeasonsWhereIsLeagueWithName(nameOfLeague:string):Observable<Season[]>{
+        return this.httpClient.get<Season[]>(this.requestURL + '/getAllSeasonWhereIsLeague/' + nameOfLeague)
+    }
+
 
 }

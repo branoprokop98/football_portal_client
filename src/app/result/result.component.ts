@@ -3,27 +3,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {ActivatedRoute} from "@angular/router";
 import {LeagueService} from "../services/league.service";
-
-
-export interface PeriodicElement {
-    home: string;
-    result: string;
-    guest: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    {home: 'Hydrogen', result: '4:3', guest: 'Some'},
-    {home: 'Helium', result: '4:3', guest: 'Some'},
-    {home: 'Lithium', result: '4:3', guest: 'Some'},
-    {home: 'Beryllium', result: '4:3', guest: 'Some'},
-    {home: 'Boron', result: '4:3', guest: 'Some'},
-    {home: 'Carbon', result: '4:3', guest: 'Some'},
-    {home: 'Nitrogen', result: '4:3', guest: 'Some'},
-    {home: 'Oxygen', result: '4:3', guest: 'Some'},
-    {home: 'Fluorine', result: '4:3', guest: 'Some'},
-    {home: 'Neon', result: '4:3', guest: 'Some'},
-];
-
+import {MatchService} from "../services/match.service";
+import {LeagueMatchSeason} from "../classes/league-match-season";
+import {Observable} from "rxjs";
+import {error} from "@angular/compiler/src/util";
+import {League} from "../classes/league";
 
 @Component({
     selector: 'app-result',
@@ -33,26 +17,56 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ResultComponent implements OnInit {
 
     selectedRound = '';
+    leagueId = ''
     selectedSeason = '';
 
     rounds: Number[] | undefined;
+    //matches: LeagueMatchSeason[] | undefined;
+    matches = new Array<LeagueMatchSeason>();
+    latestRound: string | undefined;
 
+    dataSource = this.matches
     displayedColumns: string[] = ['home', 'result', 'guest'];
-    dataSource = ELEMENT_DATA;
 
-    constructor(private route: ActivatedRoute, private leagueService: LeagueService) {
+
+    constructor(private route: ActivatedRoute, private leagueService: LeagueService, private matchService: MatchService) {
     }
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(params => {
-            this.getRoundsInLeague(params['id'])
+            this.leagueId = params['id'];
+            this.getRoundsInLeague(this.leagueId)
+            this.getLatestMatchesInLeague(this.leagueId)
+            this.getLatestRoundLeague(this.leagueId)
         })
+        console.log(this.dataSource)
     }
 
     private getRoundsInLeague(id: string): void {
         this.leagueService.getAllRoundsInLeagues(id).subscribe(data => {
             this.rounds = data;
         })
+    }
+
+    private getLatestMatchesInLeague(leagueId: string): void {
+        this.matchService.getNewestMatchesInLeague(leagueId).subscribe(data => {
+            //this.matches = data
+            this.dataSource = data;
+        })
+    }
+
+    private getLatestRoundLeague(leagueId: string): void {
+        this.leagueService.getLatestRound(leagueId).subscribe(data => {
+            this.latestRound = data
+            this.selectedRound = data.toString()
+        })
+    }
+
+    public updateMatches(): void {
+        this.matchService.getMatchesInLeagueByRound(this.leagueId, this.selectedRound).subscribe(data => {
+            //this.matches = data
+            this.dataSource = data
+        });
     }
 
 }

@@ -1,7 +1,7 @@
-import { LeagueMatch } from './league-match';
+import { LeagueMatchSeason } from './league-match-season';
 
 describe('LeagueMatches', () => {
   it('should create an instance', () => {
-    expect(new LeagueMatch()).toBeTruthy();
+    expect(new LeagueMatchSeason()).toBeTruthy();
   });
 });

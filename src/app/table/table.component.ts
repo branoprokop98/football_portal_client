@@ -6,6 +6,7 @@ import {SeasonService} from "../services/season.service";
 import {Season} from "../classes/season";
 import {Team} from "../classes/team";
 import {TeamService} from "../services/team.service";
+import {LeagueService} from "../services/league.service";
 
 export interface PeriodicElement {
     name: string;
@@ -39,7 +40,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     teams = new Array<Team>();
 
     displayedColumns: string[] = ['position', 'name', 'matches', 'winnings', 'looses', 'draws', 'score', 'points'];
-    dataSource =  new MatTableDataSource(this.teams);
+    dataSource = new MatTableDataSource(this.teams);
 
     @ViewChild(MatSort) sort: MatSort | undefined;
 
@@ -48,12 +49,15 @@ export class TableComponent implements OnInit, AfterViewInit {
         this.dataSource.sort = this.sort;
     }
 
-    constructor(private route: ActivatedRoute, private seasonService: SeasonService, private teamService: TeamService) {
+    constructor(private route: ActivatedRoute, private seasonService: SeasonService, private teamService: TeamService, private leagueService: LeagueService) {
     }
 
     ngOnInit(): void {
-        this.seasonService.getAllSeason().subscribe(data => {
-            this.seasons = data;
+        // this.seasonService.getAllSeason().subscribe(data => {
+        //     this.seasons = data;
+        // })
+        this.route.queryParams.subscribe(params => {
+            this.getAllSeasonsByLeagueName(params['league'])
         })
         this.getAllTeamsInLeague();
     }
@@ -61,10 +65,28 @@ export class TableComponent implements OnInit, AfterViewInit {
     private getAllTeamsInLeague(): void {
         this.route.queryParams.subscribe(params => {
             this.teamService.getAllTeamsByLeagueId(params['id']).subscribe(data => {
-                this.teams = data;
+                this.teams = data
                 this.dataSource = new MatTableDataSource(data)
                 // @ts-ignore
                 this.dataSource.sort = this.sort;
+            })
+        })
+    }
+
+    private getAllSeasonsByLeagueName(nameOfLeague: string): void {
+        this.seasonService.getAllSeasonsWhereIsLeagueWithName(nameOfLeague).subscribe(data => {
+            this.seasons = data
+            // @ts-ignore
+            this.selected = data[0].year.toString();
+        })
+    }
+
+    public seasonChanged(): void {
+        this.route.queryParams.subscribe(params =>{
+            this.leagueService.getLeagueIdByNameAnSeasonYear(params['league'], this.selected).subscribe(data =>{
+                this.teamService.getAllTeamsByLeagueId(data).subscribe(data =>{
+                    this.teams = data;
+                })
             })
         })
     }

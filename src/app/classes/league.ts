@@ -1,4 +1,4 @@
-import {LeagueMatch} from "./league-match";
+import {LeagueMatchSeason} from "./league-match-season";
 
 export class League {
     id: string | undefined;

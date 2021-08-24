@@ -9,11 +9,11 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <a [routerLink]="['/table']" [queryParams]="{id: league.id}" routerLinkActive="active" mat-button class="menu-button">
+        <a [routerLink]="['/table']" [queryParams]="{id: league.id, league: league.name, test: '2020/2021'}" routerLinkActive="active" mat-button class="menu-button">
             <mat-icon>table_view</mat-icon>
             <span>Tabuľka</span>
         </a>
-        <a [routerLink]="['/result']" [queryParams]="{id: league.id}" routerLinkActive="active" mat-button class="menu-button">
+        <a [routerLink]="['/result']" [queryParams]="{id: league.id, league: league.name}" routerLinkActive="active" mat-button class="menu-button">
             <mat-icon>fact_check</mat-icon>
             <span>Výsledky</span>
         </a>

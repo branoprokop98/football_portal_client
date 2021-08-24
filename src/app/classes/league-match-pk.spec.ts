@@ -1,7 +1,7 @@
-import { LeagueMatchPK } from './league-match-pk';
+import { LeagueMatchSeasonPk } from './league-match-season-pk';
 
 describe('LeagueMatchPK', () => {
   it('should create an instance', () => {
-    expect(new LeagueMatchPK()).toBeTruthy();
+    expect(new LeagueMatchSeasonPk()).toBeTruthy();
   });
 });

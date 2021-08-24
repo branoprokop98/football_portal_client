@@ -1,6 +1,6 @@
 <mat-form-field appearance="fill" style="align-self: center">
     <mat-label>Sezóna</mat-label>
-    <mat-select [(value)]="selected" >
+    <mat-select [(value)]="selected" (selectionChange)="seasonChanged()">
         <mat-option *ngFor="let season of seasons" id="{{season.id}}" value="{{season.year}}">{{season.year | uppercase}}</mat-option>
     </mat-select>
 </mat-form-field>
