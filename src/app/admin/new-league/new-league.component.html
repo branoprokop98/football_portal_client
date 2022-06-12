@@ -1,0 +1,53 @@
+<form [formGroup]="leagueForm" (ngSubmit)="submitLeague()">
+    <mat-grid-list cols="1" rowHeight="10:1">
+        <mat-grid-tile>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Názov ligy" formControlName="leagueName">
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="2" rowHeight="10:1">
+        <div formArrayName="teams">
+
+            <div *ngFor="let team of getTeamsForm.controls; let i=index" [formGroupName]="i">
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="Názov tímu" formControlName="name">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <button mat-raised-button color="warn" type="button" (click)="deleteTeam(i)">
+                        <mat-icon>delete</mat-icon>
+                        <mat-label>Zmazať tím</mat-label>
+                    </button>
+                </mat-grid-tile>
+            </div>
+        </div>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="3" rowHeight="10:1">
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" type="button" (click)="addTeam()">
+                <mat-icon>add</mat-icon>
+                <mat-label>Pridať tím</mat-label>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="warn" type="button" (click)="deleteAll()">
+                <mat-icon>clear</mat-icon>
+                <mat-label>Vymazať všetko</mat-label>
+            </button>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button mat-raised-button [disabled]="leagueForm.invalid" type="submit" color="primary">
+                <mat-icon>save</mat-icon>
+                <mat-label>Uložiť</mat-label>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</form>

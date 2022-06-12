@@ -14,3 +14,7 @@ mat-divider {
 mat-icon {
     margin-right: 8px;
 }
+
+.activate-link{
+    background: #004d0a;
+}

@@ -47,6 +47,20 @@ mat-sidenav-container {
     font-size: 1rem;
 }
 
+.auth-btn-pos{
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.auth-btn-pos > a{
+    font-size: 1rem;
+}
+
+.activate-link{
+    background: #004d0a;
+}
+
 mat-icon {
     margin-right: 8px;
 }

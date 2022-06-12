@@ -33,7 +33,5 @@ export class AppComponent implements AfterViewInit {
                     this.sidenav.open();
                 }
             });
-
-        console.log(this.route)
     }
 }

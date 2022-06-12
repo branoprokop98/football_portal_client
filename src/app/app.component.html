@@ -8,6 +8,18 @@
         </mat-icon>
     </button>
     Responsive side navigation
+
+    <div class="auth-btn-pos">
+        <a [routerLink]="['/login']" [routerLinkActive]="['activate-link']" mat-button>
+            <mat-icon>login</mat-icon>
+            <span>Prihlásenie</span>
+        </a>
+        <a [routerLink]="['/register']" [routerLinkActive]="['activate-link']" mat-button>
+            <mat-icon>app_registration</mat-icon>
+            <span>Registrácia</span>
+        </a>
+    </div>
+
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -30,3 +42,4 @@
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+

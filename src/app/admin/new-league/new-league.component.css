@@ -1,0 +1,12 @@
+input{
+    color: white;
+    text-align: center;
+}
+
+mat-icon {
+    margin-right: 8px;
+}
+
+button{
+    margin-right: 5px;
+}

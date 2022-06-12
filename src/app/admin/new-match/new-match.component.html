@@ -1,0 +1,104 @@
+<form [formGroup]="matchForm" (ngSubmit)="submitMatches()">
+
+    <mat-grid-list cols="5" rowHeight="3:1">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>League</mat-label>
+                <mat-select formControlName="league" [(value)]="league">
+                    <mat-option value="Test">Test</mat-option>
+                    <mat-option value="Test2">Test2</mat-option>
+                    <mat-option value="Test3">Test3</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-form-field>
+                <input type="number" min="1" max="100" matInput placeholder="Kolo"
+                       formControlName="round">
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-checkbox formControlName="isNewRound" (change)="onChange($event)">Nové kolo</mat-checkbox>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+
+    <mat-grid-list cols="5" rowHeight="3:1">
+        <div formArrayName="matches">
+
+            <div *ngFor="let match of matchesForm.controls; let i=index" [formGroupName]="i">
+
+                <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Domáci</mat-label>
+                        <mat-select formControlName="homeTeam">
+                            <mat-option [value]="team1">Home 1</mat-option>
+                            <mat-option [value]="team2">Home 2</mat-option>
+                            <mat-option value="Test">Home 3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input type="number" min="0" max="100" matInput placeholder="Góly domáci"
+                               formControlName="homeGoals">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+
+                <mat-grid-tile>
+                    <mat-form-field>
+                        <input type="number" min="0" max="100" matInput placeholder="Góly hostia"
+                               formControlName="guestGoals">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hostia</mat-label>
+                        <mat-select formControlName="guestTeam">
+                            <mat-option value="Test">Guest 1</mat-option>
+                            <mat-option value="Test">Guest 2</mat-option>
+                            <mat-option value="Test">Guest 3</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <button mat-raised-button color="warn" type="button" (click)="deleteMatch(i)">
+                        <mat-icon>delete</mat-icon>
+                        <mat-label>Zmazať zápas</mat-label>
+                    </button>
+                </mat-grid-tile>
+
+            </div>
+
+        </div>
+    </mat-grid-list>
+
+    <mat-grid-list cols="3" rowHeight="5:1">
+        <mat-grid-tile>
+            <button mat-raised-button color="primary" type="button" (click)="addMatch()">
+                <mat-icon>add</mat-icon>
+                <mat-label>Pridať zápas</mat-label>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <button mat-raised-button color="warn" type="button" (click)="deleteAll()">
+                <mat-icon>clear</mat-icon>
+                <mat-label>Vymazať všetko</mat-label>
+            </button>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button mat-raised-button [disabled]="matchForm.invalid" type="submit" color="primary">
+                <mat-icon>save</mat-icon>
+                <mat-label>Uložiť</mat-label>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</form>

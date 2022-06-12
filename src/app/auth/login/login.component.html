@@ -1,0 +1,18 @@
+<mat-card>
+    <form [formGroup]="form">
+        <p>
+            <mat-form-field>
+                <input type="text" matInput placeholder="Uživateľské meno" formControlName="username">
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field>
+                <input type="password" matInput placeholder="Heslo" formControlName="password">
+            </mat-form-field>
+        </p>
+
+        <button type="submit" mat-button>Prihlásiť sa</button>
+
+    </form>
+</mat-card>

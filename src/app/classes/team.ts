@@ -12,4 +12,5 @@ export class Team {
     scoredGoals: string | undefined;
     collectedGoals: string | undefined;
     league: League | undefined;
+
 }
